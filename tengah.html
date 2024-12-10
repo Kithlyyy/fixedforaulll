@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Greeting Card</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #ffb3b3, #a8e0e9, #fff6a0, #d0b1ff);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+        color: #fff;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        animation: fadeInBody 2s ease-in-out forwards;
+      }
+
+      @keyframes fadeInBody {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        opacity: 0;
+        animation: fadeInContainer 2s 1s ease-in-out forwards;
+      }
+
+      @keyframes fadeInContainer {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      header h1 {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        line-height: 1.4;
+        animation: fadeInHeader 2s 1.5s ease-in-out forwards;
+      }
+
+      @keyframes fadeInHeader {
+        0% {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      section {
+        font-size: 1em;
+        font-weight: bold;
+        color: #e38a47;
+        margin-top: 20px;
+      }
+
+      .next-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 8px 16px;
+        font-size: 0.9em;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(to right, #ff7eb3, #ff758c);
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        text-decoration: none;
+        opacity: 0;
+        transition: opacity 2s ease, transform 0.3s ease;
+        animation: fadeInButton 2s 3s ease-in-out forwards;
+      }
+
+      @keyframes fadeInButton {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .next-button:hover {
+        background: linear-gradient(to right, #ff4d6d, #ff758c);
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+
+      .next-button a {
+        text-decoration: none;
+        color: inherit;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .paper {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: -20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 2px;
+        animation: fall linear;
+        opacity: 0.9;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+        }
+      }
+
+      @media screen and (max-width: 414px) {
+        header h1 {
+          font-size: 1.6em;
+        }
+
+        .next-button {
+          font-size: 0.8em;
+          padding: 6px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 id="headerText"></h1>
+      </header>
+      <section>
+        <p id="aboutMeText"></p>
+        <button class="next-button" id="nextButton">
+          <a href="buku.html">Next</a>
+        </button>
+      </section>
+    </div>
+    <script>
+      // Efek mengetik untuk header
+      var headerTextElement = document.getElementById("headerText");
+      var headerText = "Happy Birthday Yaa 🎉";
+      var headerIndex = 0;
+
+      function typeEffectHeader() {
+        headerTextElement.textContent += headerText[headerIndex];
+        headerIndex++;
+        if (headerIndex >= headerText.length) {
+          setTimeout(() => {
+            headerTextElement.textContent = "";
+            headerIndex = 0;
+            typeEffectHeader();
+          }, 2000);
+        } else {
+          setTimeout(typeEffectHeader, 100);
+        }
+      }
+
+      typeEffectHeader();
+
+      // Efek mengetik untuk teks bawah
+      var aboutMeTextElement = document.getElementById("aboutMeText");
+      var aboutMeText = `Selamat ulang tahun, Saskia Aulia Slebew! 🎉✨
+Hari ini, dunia kayaknya lebih cerah gara-gara lo nambah umur (dan makin keren, pastinya!). Semoga hari ini penuh vibes positif, kejutan-kejutan seru, dan tawa ngakak bareng orang-orang tersayang. Jangan lupa traktir yaa, soalnya ulang tahun cuma sekali setahun—wajib spesial! 🤭
+Semoga semua impian lo yang gila-gila tapi doable itu tercapai satu per satu. Lo tuh salah satu orang yang bikin hidup ini lebih berwarna, dan gue bangga banget bisa kenal lo. Jadi, tetep jadi Saskia yang asik, keren, dan selalu bikin orang di sekitar lo senyum. 🎂🔥
+Enjoy your day to the fullest, queen! 👑`;
+      var aboutMeIndex = 0;
+
+      function typeEffectAboutMe() {
+        aboutMeTextElement.textContent += aboutMeText[aboutMeIndex];
+        aboutMeIndex++;
+        if (aboutMeIndex >= aboutMeText.length) {
+          clearInterval(aboutMeTypingInterval);
+          document.getElementById("nextButton").classList.add("show");
+        }
+      }
+
+      var aboutMeTypingInterval = setInterval(typeEffectAboutMe, 50);
+
+      // Efek kertas jatuh
+      function createPaper() {
+        var paper = document.createElement("div");
+        paper.classList.add("paper");
+        paper.style.left = Math.random() * window.innerWidth + "px";
+        paper.style.animationDuration = Math.random() * 3 + 2 + "s";
+        paper.style.backgroundColor =
+          "hsl(" + Math.random() * 360 + ", 100%, 70%)";
+        paper.style.width = paper.style.height =
+          Math.random() * 15 + 5 + "px";
+
+        document.body.appendChild(paper);
+
+        setTimeout(() => {
+          paper.remove();
+        }, 5000);
+      }
+
+      setInterval(createPaper, 200);
+    </script>
+  </body>
+</html>  
