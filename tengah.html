@@ -84,7 +84,7 @@
       }
 
       .next-button {
-        display: inline-block;
+        display: none;
         margin-top: 20px;
         padding: 8px 16px;
         font-size: 0.9em;
@@ -96,19 +96,13 @@
         cursor: pointer;
         text-decoration: none;
         opacity: 0;
-        transition: opacity 2s ease, transform 0.3s ease;
-        animation: fadeInButton 2s 3s ease-in-out forwards;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease;
       }
 
-      @keyframes fadeInButton {
-        0% {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .next-button.show {
+        display: inline-block;
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .next-button:hover {
@@ -203,12 +197,17 @@ Enjoy your day to the fullest, queen! 👑`;
         aboutMeTextElement.textContent += aboutMeText[aboutMeIndex];
         aboutMeIndex++;
         if (aboutMeIndex >= aboutMeText.length) {
-          clearInterval(aboutMeTypingInterval);
           document.getElementById("nextButton").classList.add("show");
         }
       }
 
-      var aboutMeTypingInterval = setInterval(typeEffectAboutMe, 50);
+      var aboutMeTypingInterval = setInterval(() => {
+        if (aboutMeIndex < aboutMeText.length) {
+          typeEffectAboutMe();
+        } else {
+          clearInterval(aboutMeTypingInterval);
+        }
+      }, 50);
 
       // Efek kertas jatuh
       function createPaper() {
@@ -231,4 +230,4 @@ Enjoy your day to the fullest, queen! 👑`;
       setInterval(createPaper, 200);
     </script>
   </body>
-</html>  
+</html>
